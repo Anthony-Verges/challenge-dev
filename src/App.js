@@ -2,8 +2,12 @@ import CardEquipage from "./CardEquipage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import { Button } from "reactstrap";
 
 function App() {
+  const myFirstName = ["Anthony"];
+  const myLastName = "Vergès";
+
   const [newMembers, setNewMembers] = useState("");
   const [members, setMembers] = useState({});
   const [loading, setLoading] = useState(true);
@@ -22,7 +26,7 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, [members, newMembers]); // Chercher d'ou vient le problème du tableau de dépendance + Trouver comment refresh l'input avec des strings vides
+  }, []); // Chercher d'ou vient le problème du tableau de dépendance + Trouver comment refresh l'input avec des strings vides
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,34 +52,43 @@ function App() {
         <h2>Ajouter un(e) Argonaute</h2>
         <form className="new-member-form" onSubmit={handleSubmit}>
           <label htmlFor="name">Nom de l&apos;Argonaute</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Entre un membre"
-            onChange={(e) => {
-              setNewMembers(e.target.value);
-            }}
-          />
-          <button type="submit">Envoyer</button>
+          <div className="display-form-button">
+            <div>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Entrez un membre"
+                onChange={(e) => {
+                  setNewMembers(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <Button className="button-submit" type="submit">
+                Envoyer
+              </Button>
+            </div>
+          </div>
         </form>
 
         <h2>Membres de l'équipage</h2>
-        <section className="member-list">
-          {loading ? (
-            <div>
-              <h1>Chargement...</h1>
-            </div>
-          ) : (
-            members.map((item) => {
-              return <CardEquipage key={item.id} name={item.name} />;
-            })
-          )}
-        </section>
+        {loading ? (
+          <div>
+            <h1>Chargement...</h1>
+          </div>
+        ) : (
+          members.map((item) => {
+            return <CardEquipage key={item.id} name={item.name} />;
+          })
+        )}
       </main>
 
       <footer>
-        <p>Réalisé par Jason en Anthestérion de l'an 515 avant JC</p>
+        <p>
+          Réalisé par {myFirstName[0]} {myLastName} en Anthestérion de l'an 515
+          avant JC
+        </p>
       </footer>
     </div>
   );

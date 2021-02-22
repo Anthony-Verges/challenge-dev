@@ -1,8 +1,10 @@
+import { List, ListInlineItem } from "reactstrap";
+
 const CardEquipage = ({ name }) => {
   return (
-    <div className="member-of-equipage" style={{ marginTop: "1rem" }}>
-      {name}
-    </div>
+    <List type="inline">
+      <ListInlineItem>{name}</ListInlineItem>
+    </List>
   );
 };
 

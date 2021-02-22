@@ -42,7 +42,35 @@ label {
 .member-item {
   padding: 0.25em 0;
 }
+.display-form-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
+#name {
+  width: 20rem;
+  height: 1.5rem;
+  border-radius: 5px;
+  outline: none;
+  border: 2px solid #f76c6c;
+  margin-bottom: 2rem;
+}
+
+.button-submit {
+  border: 1px solid #f76c6c;
+  background-color: #f76c6c;
+  color: white;
+  width: 15rem;
+  height: 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.button-submit:hover {
+  border: 1px solid #f99a9a;
+  background-color: #f99a9a;
+}
 footer {
   margin-top: 2em;
   text-align: center;
