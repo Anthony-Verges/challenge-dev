@@ -1,6 +1,37 @@
+import CardEquipage from "./CardEquipage";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
+  const [newMembers, setNewMembers] = useState("");
+  const [members, setMembers] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/API/v1/equipage")
+      .then((res) => {
+        const members = res.data;
+
+        setMembers(members);
+
+        setLoading(false);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [members, newMembers]); // Chercher d'ou vient le problème du tableau de dépendance + Trouver comment refresh l'input avec des strings vides
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post(`http://localhost:5000/API/v1/equipage`, {
+      name: newMembers,
+    });
+    // setNewMembers("");
+  };
+
   return (
     <div className="App">
       <header>
@@ -15,17 +46,31 @@ function App() {
 
       <main>
         <h2>Ajouter un(e) Argonaute</h2>
-        <form class="new-member-form">
-          <label for="name">Nom de l&apos;Argonaute</label>
-          <input id="name" name="name" type="text" placeholder="Charalampos" />
+        <form className="new-member-form" onSubmit={handleSubmit}>
+          <label htmlFor="name">Nom de l&apos;Argonaute</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Entre un membre"
+            onChange={(e) => {
+              setNewMembers(e.target.value);
+            }}
+          />
           <button type="submit">Envoyer</button>
         </form>
 
         <h2>Membres de l'équipage</h2>
-        <section class="member-list">
-          <div class="member-item">Eleftheria</div>
-          <div class="member-item">Gennadios</div>
-          <div class="member-item">Lysimachos</div>
+        <section className="member-list">
+          {loading ? (
+            <div>
+              <h1>Chargement...</h1>
+            </div>
+          ) : (
+            members.map((item) => {
+              return <CardEquipage key={item.id} name={item.name} />;
+            })
+          )}
         </section>
       </main>
 
