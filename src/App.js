@@ -11,7 +11,7 @@ function App() {
   const [newMembers, setNewMembers] = useState("");
   const [members, setMembers] = useState({});
   const [loading, setLoading] = useState(true);
-
+  // utiliser toastofy pour signaler que le post a bien fonctionné
   useEffect(() => {
     axios
       .get("http://localhost:5000/API/v1/equipage")
@@ -26,14 +26,14 @@ function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, []); // Chercher d'ou vient le problème du tableau de dépendance + Trouver comment refresh l'input avec des strings vides
+  }, [newMembers]); // Chercher d'ou vient le problème du tableau de dépendance
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post(`http://localhost:5000/API/v1/equipage`, {
       name: newMembers,
     });
-    // setNewMembers("");
+    setNewMembers("");
   };
 
   return (
@@ -62,6 +62,7 @@ function App() {
                 onChange={(e) => {
                   setNewMembers(e.target.value);
                 }}
+                value={newMembers}
               />
             </div>
             <div>
