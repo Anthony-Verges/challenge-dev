@@ -1,15 +1,17 @@
 import CardEquipage from "./CardEquipage";
+// import OnlyFailedNote from "./OnlyFailedNote";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import { Button } from "reactstrap";
+// import TagCloud from "./TagCloud";
 
 function App() {
   const myFirstName = ["Anthony"];
   const myLastName = "Vergès";
 
   const [newMembers, setNewMembers] = useState("");
-  const [members, setMembers] = useState({});
+  const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   // utiliser toastofy pour signaler que le post a bien fonctionné
   useEffect(() => {
@@ -19,7 +21,6 @@ function App() {
         const members = res.data;
 
         setMembers(members);
-
         setLoading(false);
       })
 
@@ -79,12 +80,21 @@ function App() {
             <h1>Chargement...</h1>
           </div>
         ) : (
-          members.map((item) => {
-            return <CardEquipage key={item.id} name={item.name} />;
-          })
+          <div>
+            {members.map((item) => {
+              return (
+                <CardEquipage key={item.id} name={item.name} Id={item.id} />
+              );
+            })}
+          </div>
         )}
       </main>
-
+      {/* <div>
+        <OnlyFailedNote />
+      </div> */}
+      {/* <div>
+        <TagCloud />
+      </div> */}
       <footer>
         <p>
           Réalisé par {myFirstName[0]} {myLastName} en Anthestérion de l'an 515
