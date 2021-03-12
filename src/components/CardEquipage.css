@@ -1,0 +1,25 @@
+.list {
+  border: 1px solid #f76c6c;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background-color: #ffe2e2;
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-delete {
+  border: 1px solid #f76c6c;
+  background-color: #f76c6c;
+  color: white;
+  width: 15rem;
+  height: 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+}
+.button-delete:hover {
+  border: 1px solid #f99a9a;
+  background-color: #f99a9a;
+}

@@ -1,4 +1,4 @@
-import CardEquipage from "./CardEquipage";
+import CardEquipage from "./components/CardEquipage";
 // import OnlyFailedNote from "./OnlyFailedNote";
 import { useEffect, useState } from "react";
 import axios from "axios";
