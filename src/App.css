@@ -80,3 +80,15 @@ footer {
   background: #f76c6c;
   padding: 0.25em 0;
 }
+.notif {
+  background-color: rgb(84, 228, 84);
+  color: white;
+  height: 2rem;
+  width: 20rem;
+  border: 1px solid rgb(84, 228, 84);
+  border-radius: 5px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
